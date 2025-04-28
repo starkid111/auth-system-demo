@@ -1,6 +1,7 @@
 "use client"
 
 import { registerUser } from '@/utils/api';
+import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react'
 
@@ -10,30 +11,28 @@ export const RegisterPage = () => {
  const [password , setPassword] = useState("");
  const [confirmPassword , setConfirmPassword] = useState("")
  const [loading , setLoading] = useState(false)
- const [error , setError] = useState("")
- const [success , setSuccess] = useState("")
+
 
 
 const handleRegister = async (e : React.FormEvent) => {
     e.preventDefault()
-    setSuccess("")
-    setError('')
+    
 
 
     if (password !== confirmPassword) {
-        setError('Passwords do not match');
+        toast.error('Passwords do not match');
         return;
       }
       
     try {
         setLoading(true);
         const response = await registerUser(email, password);
-        setSuccess('Registration successful! Redirecting...');
+        toast.success("Registration succesful")
         setTimeout(() => {
           router.push('/login');
         }, 2000); 
       } catch (err: any) {
-        setError('Registration failed. Please try again.');
+        toast.error('Registration failed. Please try again.');
       } finally {
         setLoading(false);
       }
@@ -80,8 +79,7 @@ const handleRegister = async (e : React.FormEvent) => {
       </button>
     </form>
 
-    {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
-    {success && <p className="text-green-500 mt-4 text-center">{success}</p>}
+  
   </div>
   )
 }
