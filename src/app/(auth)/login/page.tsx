@@ -22,7 +22,13 @@ const handleLogin = async(e : React.FormEvent) => {
          const data = await loginUser(email , password);
          login(data.token);
     } catch (err: any) {
-        setError(err.message);
+        if (err.response && err.response.status === 400) {
+            setError('Invalid credentials. Please try again.');
+          } else if (err.message.includes('Network')) {
+            setError('Network error. Please check your connection.');
+          } else {
+            setError('Something went wrong. Please try again later.');
+          }
       } finally {
         setLoading(false);
       }

@@ -35,3 +35,16 @@ export const fetchUserData = async(token : string | null  ) => {
         throw new Error('Failed to fetch user data');
     }
 }
+
+export const registerUser =  async (email : string , password : string ) => {
+   try {
+    const response =  await api.post("/register" , {
+        email ,
+        password ,
+    })
+    const data = response.data
+    return data
+   } catch {
+    
+   }
+}

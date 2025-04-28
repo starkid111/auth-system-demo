@@ -7,7 +7,7 @@ import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
-    const {token , logout } = useAuth()
+    const {token , logout , loadingState } = useAuth()
     const [userData , setUserData] = useState<any>(null)
     const [loading , setLoading] = useState(false)
     const [error , setError] = useState("")
@@ -27,7 +27,7 @@ export default function Dashboard() {
       }
     };
 
-    if (!token) {
+    if (!loadingState && !token) {
       router.push('/login');
     } else {
       fetchUser();
