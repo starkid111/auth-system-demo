@@ -1,10 +1,12 @@
 "use client"
 
 import { loginUser } from '@/utils/api';
+import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react'
 
 const LoginPage = () => {
+   const {login} = useAuth()
 const router = useRouter()
 const [email , setEmail] = useState("");
 const [password , setPassword] = useState("");
@@ -17,9 +19,8 @@ const handleLogin = async(e : React.FormEvent) => {
     setLoading(true)
     setError("")
     try {
-         const data = await loginUser(email , password)
-         localStorage.setItem("token" , data.token)
-         router.push("/dashboard")
+         const data = await loginUser(email , password);
+         login(data.token);
     } catch (err: any) {
         setError(err.message);
       } finally {
