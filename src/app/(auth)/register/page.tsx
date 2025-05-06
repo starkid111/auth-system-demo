@@ -2,7 +2,7 @@
 
 import { registerUser } from '@/utils/supabaseAuth';
 import toast from 'react-hot-toast';
-import { useAuth } from '@/app/context/AuthContext';
+//import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react'
 
@@ -34,7 +34,7 @@ const handleRegister = async (e : React.FormEvent) => {
         setTimeout(() => {
           router.push('/login');
         }, 2000); 
-      } catch (err: any) {
+      } catch (error) {
         toast.error('User already existed.');
       } finally {
         setLoading(false);

@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-import { fetchUserData } from '@/utils/api';
+//import { fetchUserData } from '@/utils/api';
 import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
     const {session , logout , loadingState } = useAuth()
    // const [userData , setUserData] = useState<any>(null)
-    const [loading , setLoading] = useState(false)
-    const [error , setError] = useState("")
+    
   const router = useRouter();
 
   // useEffect(() => {
@@ -40,7 +39,7 @@ export default function Dashboard() {
   }
  }, [session , router , loadingState])
  
-  if (loading) {
+  if (loadingState) {
     return (
       <div className="max-w-2xl mx-auto mt-24 p-6 text-center">
         <p>Loading user data...</p>
@@ -48,13 +47,6 @@ export default function Dashboard() {
     );
   }
 
-  if (error) {
-    return (
-      <div className="max-w-2xl mx-auto mt-24 p-6 text-center text-red-500">
-        <p>{error}</p>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-2xl mx-auto mt-24 p-6 bg-white rounded-lg shadow-md">

@@ -6,7 +6,7 @@ export const registerUser = async  (email : string , password : string) =>  {
       if (error) {
         throw error
       }
-     
+     return data
 } 
 
 //login existing user 

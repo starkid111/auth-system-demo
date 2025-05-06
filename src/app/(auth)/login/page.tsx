@@ -1,7 +1,7 @@
 "use client";
 
 import { loginSchema } from "@/schema";
-import { loginUser } from "@/utils/mockAuth";
+//import { loginUser } from "@/utils/mockAuth";
 import toast from "react-hot-toast";
 import { useAuth } from "@/app/context/AuthContext";
 import { useState } from "react";
@@ -30,7 +30,7 @@ const LoginPage = () => {
       // login(data.token);
       await login(email , password)
       toast.success("Login Succesfully ");
-    } catch (err: any) {
+    } catch (error) {
       toast.error("Login Failed! Please check your credentials.");
     } finally {
       setLoading(false);
