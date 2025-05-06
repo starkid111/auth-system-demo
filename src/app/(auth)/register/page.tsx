@@ -1,11 +1,13 @@
 "use client"
 
-import { registerUser } from '@/utils/api';
+import { registerUser } from '@/utils/supabaseAuth';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react'
 
 export const RegisterPage = () => {
+  //const {login} = useAuth() // add only when  mocking the backend
     const router = useRouter()
  const [email , setEmail] = useState("");
  const [password , setPassword] = useState("");
@@ -18,7 +20,6 @@ const handleRegister = async (e : React.FormEvent) => {
     e.preventDefault()
     
 
-
     if (password !== confirmPassword) {
         toast.error('Passwords do not match');
         return;
@@ -26,13 +27,15 @@ const handleRegister = async (e : React.FormEvent) => {
       
     try {
         setLoading(true);
-        const response = await registerUser(email, password);
-        toast.success("Registration succesful")
+        registerUser(email, password)
+        // const tokenData = {token : "mock-data" + Date.now()}
+        // login(tokenData.token)
+        toast.success("Account created. Check your email to confirm.");
         setTimeout(() => {
           router.push('/login');
         }, 2000); 
       } catch (err: any) {
-        toast.error('Registration failed. Please try again.');
+        toast.error('User already existed.');
       } finally {
         setLoading(false);
       }

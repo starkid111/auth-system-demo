@@ -7,34 +7,39 @@ import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
-    const {token , logout , loadingState } = useAuth()
-    const [userData , setUserData] = useState<any>(null)
+    const {session , logout , loadingState } = useAuth()
+   // const [userData , setUserData] = useState<any>(null)
     const [loading , setLoading] = useState(false)
     const [error , setError] = useState("")
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchUserData(token);
-        setUserData(data); 
-      } catch (error) {
-        setError("Failed to fetch user data");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const data = await fetchUserData(token);
+  //       setUserData(data); 
+  //     } catch (error) {
+  //       setError("Failed to fetch user data");
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    if (!loadingState && !token) {
-      router.push('/login');
-    } else {
-      fetchUser();
-    }
-  }, [token, router]);
+  //   if (!loadingState && !token) {
+  //     router.push('/login');
+  //   } else {
+  //     fetchUser();
+  //   }
+  // }, [token, router , loadingState]);
 
-
+ useEffect(() => {
+  if (!loadingState && !session) {
+    router.push("/login")
+  }
+ }, [session , router , loadingState])
+ 
   if (loading) {
     return (
       <div className="max-w-2xl mx-auto mt-24 p-6 text-center">
@@ -56,11 +61,11 @@ export default function Dashboard() {
     <h1 className="text-3xl font-bold mb-4 text-center">Dashboard</h1>
     <p className="text-center mb-6">Welcome, you are logged in!</p>
 
-    {userData && (
+    {session && (
       <div className="bg-gray-100 p-4 rounded-md">
         <h2 className="text-xl font-semibold">User Info</h2>
-        <p><strong>Name:</strong> {userData.first_name} {userData.last_name}</p>
-        <p><strong>Email:</strong> {userData.email}</p>
+        <p><strong>Welcome</strong> {session?.user.email}</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim labore reprehenderit odit nam aliquam quo dolores quis iste nisi corporis.</p>
       </div>
     )}
 

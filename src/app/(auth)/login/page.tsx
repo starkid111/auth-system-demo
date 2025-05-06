@@ -1,7 +1,7 @@
 "use client";
 
 import { loginSchema } from "@/schema";
-import { loginUser } from "@/utils/api";
+import { loginUser } from "@/utils/mockAuth";
 import toast from "react-hot-toast";
 import { useAuth } from "@/app/context/AuthContext";
 import { useState } from "react";
@@ -26,8 +26,9 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const data = await loginUser(email, password);
-      login(data.token);
+      // const data =  loginUser(email, password);
+      // login(data.token);
+      await login(email , password)
       toast.success("Login Succesfully ");
     } catch (err: any) {
       toast.error("Login Failed! Please check your credentials.");
@@ -74,6 +75,12 @@ const LoginPage = () => {
             "Login"
           )}
         </button>
+        <p className="text-center text-sm mt-4">
+          Don’t have an account?{" "}
+          <a href="/register" className="text-blue-600 underline">
+            Register
+          </a>
+        </p>
       </form>
     </div>
   );
