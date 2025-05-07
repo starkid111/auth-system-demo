@@ -1,12 +1,20 @@
 import { supabase } from "./supabaseClient";
 
 //Register a new User 
-export const registerUser = async (email: string, password: string, full_name: string) => {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-  });
+export const registerUser = async (email: string, password: string) => {
+   const redirectTo = `${process.env.NEXT_PUBLIC_BASE_URL}/login`
+   const { data, error } = await supabase.auth.signUp(
+    {
+      email,
+      password,
+      options: {
+        emailRedirectTo: redirectTo,
+      },
+    },
+        
+  );
 
+  
 
   return data;
 };
