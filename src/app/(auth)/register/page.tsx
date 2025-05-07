@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   //const {login} = useAuth() // add only when  mocking the backend
   const router = useRouter();
   const [email, setEmail] = useState("");
