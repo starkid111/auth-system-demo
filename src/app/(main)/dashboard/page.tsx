@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import Link from 'next/link';
 //import { fetchUserData } from '@/utils/api';
 import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -61,14 +62,18 @@ export default function Dashboard() {
       </div>
     )}
 
-    <div className="flex justify-center mt-6">
-      <button
-        onClick={logout} // Calls logout to clear token from localStorage
-        className="bg-black text-white py-2 px-6 rounded-md hover:bg-gray-800 transition"
-      >
-        Logout
-      </button>
-    </div>
+ <div className="space-y-4">
+        <Link href="/profile" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-full block text-center">
+          go to profile
+        </Link>
+
+        <button
+          onClick={logout}
+          className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded w-full"
+        >
+          Logout
+        </button>
+      </div>
   </div>
   );
 }
