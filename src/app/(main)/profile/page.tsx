@@ -83,7 +83,8 @@ if (loading) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+  <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md space-y-6">
     {editMode ? (
       <>
         <div>
@@ -91,35 +92,35 @@ if (loading) {
             type="text"
             value={newFullName}
             onChange={(e) => setNewFullName(e.target.value)}
-            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your full name"
           />
         </div>
         <button
           onClick={handleUpdateProfile}
-          className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-full"
+          className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg w-full md:w-auto"
           disabled={loading}
         >
           {loading ? "Updating..." : "Update Profile"}
         </button>
         <button
           onClick={() => setEditMode(false)}
-          className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded w-full mt-2"
+          className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg w-full md:w-auto mt-2  ml-2"
         >
           Cancel
         </button>
       </>
     ) : (
       <>
-        <p>
-          <span className="font-bold">Full Name:</span> {profile.full_name}
+        <p className="text-gray-800">
+          <span className="font-semibold">Full Name:</span> {profile.full_name}
         </p>
-        <p>
-          <span className="font-bold">Email:</span> {session?.user.email}
+        <p className="text-gray-800">
+          <span className="font-semibold">Email:</span> {session?.user.email}
         </p>
         <button
           onClick={() => setEditMode(true)}
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-full mt-4"
+          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full md:w-auto mt-4"
         >
           Edit Profile
         </button>
@@ -128,11 +129,13 @@ if (loading) {
 
     <button
       onClick={logout}
-      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded w-full mt-4"
+      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg w-full md:w-auto mt-4 ml-2"
     >
       Logout
     </button>
   </div>
+</div>
+
   );
 };
 
